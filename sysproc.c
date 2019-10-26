@@ -6,9 +6,11 @@
 #include "memlayout.h"
 #include "mmu.h"
 #include "proc.h"
+#include "spinlock.h"
 
 
 int glob_counter ;
+struct spinlock counter_lock;
 int
 sys_fork(void)
 {
@@ -95,18 +97,34 @@ sys_uptime(void)
 void sys_init(void)
 {
   glob_counter = 0;
+  //initlock(&counter_lock, "counter_lock");
   return;
 }
 int sys_get(void)
 {
-  return glob_counter;
+  int x;
+  //acquire(&counter_lock);
+  x = glob_counter;
+  //release(&counter_lock);
+  return x;
 }
 void sys_set(int x)
 {
   
-  
+  //acquire(&counter_lock);
   argint(0,&x);
   //cprintf("Hello %d \n",x);
   glob_counter =x;
+  //release(&counter_lock);
+  return;
+}
+void sys_my_lock(void)
+{
+  acquire(&counter_lock);
+  return;
+}
+void sys_my_unlock(void)
+{
+  release(&counter_lock);
   return;
 }

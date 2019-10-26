@@ -106,7 +106,8 @@ extern int sys_uptime(void);
 extern int sys_init(void);
 extern int sys_get(void);
 extern int sys_set(void);
-
+extern int sys_my_lock(void);
+extern int sys_my_unlock(void);
 
 
 static int (*syscalls[])(void) = {
@@ -134,6 +135,8 @@ static int (*syscalls[])(void) = {
 [SYS_init]    sys_init,
 [SYS_get]     sys_get,
 [SYS_set]     sys_set,
+[SYS_my_lock] sys_my_lock,
+[SYS_my_unlock] sys_my_unlock,
 };
 
 void

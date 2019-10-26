@@ -165,6 +165,8 @@ extern uint     ticks;
 extern int 		glob_counter;
 void            tvinit(void);
 extern struct spinlock tickslock;
+extern struct spinlock counter_lock;
+
 
 // uart.c
 void            uartinit(void);

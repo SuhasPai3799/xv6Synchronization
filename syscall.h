@@ -23,3 +23,5 @@
 #define SYS_init   22
 #define SYS_get    23
 #define SYS_set    24
+#define SYS_my_lock 25
+#define SYS_my_unlock 26

@@ -26,6 +26,8 @@ int uptime(void);
 void init(void);
 int get(void);
 void set(int);
+void my_lock(void);
+void my_unlock(void);
 
 // ulib.c
 int stat(const char*, struct stat*);
