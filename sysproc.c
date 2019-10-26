@@ -97,7 +97,7 @@ sys_uptime(void)
 void sys_init(void)
 {
   glob_counter = 0;
-  //initlock(&counter_lock, "counter_lock");
+  initlock(&counter_lock, "counter_lock");
   return;
 }
 int sys_get(void)
@@ -112,10 +112,12 @@ void sys_set(int x)
 {
   
   //acquire(&counter_lock);
-  argint(0,&x);
-  //cprintf("Hello %d \n",x);
-  glob_counter =x;
-  //release(&counter_lock);
+  acquire(&counter_lock);
+  glob_counter++;
+  //wakeup(&glob_counter);
+  release(&counter_lock);
+  // wakeup(&glob_counter);
+  // release(&counter_lock);
   return;
 }
 void sys_my_lock(void)
@@ -125,6 +127,7 @@ void sys_my_lock(void)
 }
 void sys_my_unlock(void)
 {
+  wakeup(&glob_counter);
   release(&counter_lock);
   return;
 }

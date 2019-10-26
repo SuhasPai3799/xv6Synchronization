@@ -16,8 +16,7 @@ main(int argc, char *argv[])
   }
   else
   {
-    exec("race_cond",argv_2);
-    
+    exec("race_cond",argv_2); 
   }
   
  
