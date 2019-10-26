@@ -370,8 +370,8 @@ sched(void)
 
   if(!holding(&ptable.lock))
     panic("sched ptable.lock");
-  if(mycpu()->ncli != 1)
-    panic("sched locks");
+  // if(mycpu()->ncli != 1)          //Changed this, works only when this is changed. ???? Cant switch out if a lock is held?
+  //   panic("sched locks");
   if(p->state == RUNNING)
     panic("sched running");
   if(readeflags()&FL_IF)

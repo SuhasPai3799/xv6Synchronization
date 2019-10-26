@@ -112,10 +112,11 @@ void sys_set(int x)
 {
   
   //acquire(&counter_lock);
-  acquire(&counter_lock);
-  glob_counter++;
+  //acquire(&counter_lock);
+  argint(0,&x);
+  glob_counter=x;
   //wakeup(&glob_counter);
-  release(&counter_lock);
+  //release(&counter_lock);
   // wakeup(&glob_counter);
   // release(&counter_lock);
   return;
@@ -127,7 +128,7 @@ void sys_my_lock(void)
 }
 void sys_my_unlock(void)
 {
-  wakeup(&glob_counter);
+  //wakeup(&glob_counter);
   release(&counter_lock);
   return;
 }

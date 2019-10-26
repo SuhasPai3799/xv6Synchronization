@@ -8,10 +8,12 @@ main(int argc, char *argv[])
   //init();
   for(int i=0;i<10000;i++)
   {
-    //my_lock();
+    //printf(1,"%d\n",i);
+    my_lock();
     int g = get();
     set(g+1);
-    //my_unlock();
+    //printf(1,"%d %d\n",i,g );
+    my_unlock();
   }
   int x = get();
   printf(1,"%d\n",x);

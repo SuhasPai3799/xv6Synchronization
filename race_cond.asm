@@ -23,6 +23,7 @@ main(int argc, char *argv[])
   //init();
   for(int i=0;i<10000;i++)
   {
+    //printf(1,"%d\n",i);
     //my_lock();
     int g = get();
   18:	e8 2d 03 00 00       	call   34a <get>
@@ -35,6 +36,7 @@ main(int argc, char *argv[])
   29:	83 c4 10             	add    $0x10,%esp
   2c:	83 eb 01             	sub    $0x1,%ebx
   2f:	75 e7                	jne    18 <main+0x18>
+    //printf(1,"%d %d\n",i,g );
     //my_unlock();
   }
   int x = get();

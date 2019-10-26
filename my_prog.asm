@@ -20,10 +20,11 @@ main(int argc, char *argv[])
    e:	51                   	push   %ecx
    f:	bb 10 27 00 00       	mov    $0x2710,%ebx
   14:	8d 74 26 00          	lea    0x0(%esi,%eiz,1),%esi
-  	//init();
 	for(int i=0;i<10000;i++)
 	{
+		//printf(1,"%d\n",i);
 		//my_lock();
+		//printf(1,"%d\n",i);
 		int g = get();
   18:	e8 2d 03 00 00       	call   34a <get>
 		set(g+1);
@@ -35,7 +36,9 @@ main(int argc, char *argv[])
   29:	83 c4 10             	add    $0x10,%esp
   2c:	83 eb 01             	sub    $0x1,%ebx
   2f:	75 e7                	jne    18 <main+0x18>
+		//printf(1,"%d\n",i );
 		//my_unlock();
+		//printf(1,"%d %d\n",i,g );	
 	}
 	int x = get();
   31:	e8 14 03 00 00       	call   34a <get>
