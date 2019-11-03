@@ -1,4 +1,4 @@
-#include "types.h"
+  #include "types.h"
 #include "x86.h"
 #include "defs.h"
 #include "date.h"
@@ -121,14 +121,53 @@ void sys_set(int x)
   // release(&counter_lock);
   return;
 }
-void sys_my_lock(void)
+int sys_my_futex_lock(void)
 {
-  acquire(&counter_lock);
-  return;
+  struct spinlock *lk = &counter_lock;
+  int flag = 0;
+  int tot_time = 0 ; // total time spent waiting
+    
+    while(1)
+    {
+    
+      //cprintf("Yielded\n");
+      int st = sys_uptime();
+      for(int i=0;i<10;i++)
+      {
+        if((xchg(&lk->locked, 1) != 0))
+          continue;
+        else
+        {
+          flag++;
+          break;
+        }
+      }
+      int end = sys_uptime();
+      tot_time+=(end-st);
+      if(flag)
+        return tot_time;
+      yield();
+    
+    }
+  //while((xchg(&lk->locked, 1) != 0));
+
+  //acquire(&counter_lock);
+  return tot_time;
+}
+int sys_my_lock(void)
+{
+  int tot_time=sys_uptime();
+  struct spinlock *lk = &counter_lock;
+  while((xchg(&lk->locked, 1) != 0));
+  tot_time = sys_uptime()-tot_time;
+  return tot_time;
 }
 void sys_my_unlock(void)
 {
   //wakeup(&glob_counter);
-  release(&counter_lock);
+  struct spinlock *lk = &counter_lock;
+  asm volatile("movl $0, %0" : "+m" (lk->locked) : );
+  //yield();
+  //release(&counter_lock);
   return;
 }

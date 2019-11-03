@@ -12,7 +12,7 @@ main(int argc, char *argv[])
   for(int i=0;i<10000;i++)
   {
     //printf(1,"%d\n",i);
-    int t = my_futex_lock();
+    int t = my_lock();
     tot_time+=t;
     //int st = uptime();
     //printf(1,"%d\n",i);
@@ -31,7 +31,7 @@ main(int argc, char *argv[])
   //end = (end-st)*10;
   printf(1,"Total waiting time in microseconds is %d\n", tot_time*10);
   //printf(1,"%Total execution time in microseconds is %d\n",real_time);
-  //printf(1,"%d\n",x);
+  // printf(1,"%d\n",x);
   exit();
  
 }

@@ -184,6 +184,9 @@ UPROGS=\
 	_my_prog\
 	_race_cond\
 	_parent\
+	_parent1\
+	_my_prog1\
+	_race_cond1\
 
 fs.img: mkfs README $(UPROGS)
 	./mkfs fs.img README $(UPROGS)
@@ -253,7 +256,7 @@ qemu-nox-gdb: fs.img xv6.img .gdbinit
 EXTRA=\
 	mkfs.c ulib.c user.h cat.c echo.c forktest.c grep.c kill.c\
 	ln.c ls.c mkdir.c rm.c stressfs.c usertests.c wc.c zombie.c\
-	printf.c umalloc.c my_prog.c race_cond.c parent.c\
+	printf.c umalloc.c my_prog.c race_cond.c parent.c parent1.c race_cond1.c my_prog1.c\
 	README dot-bochsrc *.pl toc.* runoff runoff1 runoff.list\
 	.gdbinit.tmpl gdbutil\
 

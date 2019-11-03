@@ -12,12 +12,12 @@ main(int argc, char *argv[])
   int pid = fork();
   if(pid == 0)
   {
-    exec("my_prog",argv_1);
+    exec("my_prog1",argv_1);
    
   }
   else
   {
-    exec("race_cond",argv_2); 
+    exec("race_cond1",argv_2); 
   }
   
  

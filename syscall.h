@@ -25,3 +25,4 @@
 #define SYS_set    24
 #define SYS_my_lock 25
 #define SYS_my_unlock 26
+#define SYS_my_futex_lock 27

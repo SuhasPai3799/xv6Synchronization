@@ -26,7 +26,8 @@ int uptime(void);
 void init(void);
 int get(void);
 void set(int);
-void my_lock(void);
+int my_lock(void);
+int my_futex_lock(void);
 void my_unlock(void);
 
 // ulib.c
