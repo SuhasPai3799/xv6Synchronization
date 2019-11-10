@@ -103,22 +103,17 @@ void sys_init(void)
 int sys_get(void)
 {
   int x;
-  //acquire(&counter_lock);
+
   x = glob_counter;
-  //release(&counter_lock);
+
   return x;
 }
 void sys_set(int x)
 {
-  
-  //acquire(&counter_lock);
-  //acquire(&counter_lock);
+
   argint(0,&x);
   glob_counter=x;
-  //wakeup(&glob_counter);
-  //release(&counter_lock);
-  // wakeup(&glob_counter);
-  // release(&counter_lock);
+
   return;
 }
 int sys_my_futex_lock(void)
@@ -130,7 +125,7 @@ int sys_my_futex_lock(void)
     while(1)
     {
     
-      //cprintf("Yielded\n");
+
       int st = sys_uptime();
       for(int i=0;i<10;i++)
       {
@@ -149,9 +144,7 @@ int sys_my_futex_lock(void)
       yield();
     
     }
-  //while((xchg(&lk->locked, 1) != 0));
 
-  //acquire(&counter_lock);
   return tot_time;
 }
 int sys_my_lock(void)
@@ -164,10 +157,9 @@ int sys_my_lock(void)
 }
 void sys_my_unlock(void)
 {
-  //wakeup(&glob_counter);
+
   struct spinlock *lk = &counter_lock;
   asm volatile("movl $0, %0" : "+m" (lk->locked) : );
-  //yield();
-  //release(&counter_lock);
+
   return;
 }
