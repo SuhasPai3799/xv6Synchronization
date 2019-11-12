@@ -44,7 +44,7 @@ main(int argc, char *argv[])
   for(int i=0;i<n_children;i++)
   wait();
   int g = get();
-  printf(1,"Statistics for program with %d children using spin locks to access a shared counter is as follows :\n",n_children);
+  printf(1,"Statistics for program with %d children to access a shared counter is as follows :\n",n_children);
   printf(1,"Final value of the shared counter is %d\n",g);
   int end = uptime() - st;
   end = end *10;

@@ -21,22 +21,22 @@ main(int argc, char *argv[])
     int pid = fork();
     if(pid==0)
     {
-      
+      int tot_time = 0;
+      int real_time = uptime();
     for(int i=0;i<10000;i++)
     {
 
-   
-   
-
+      int t = my_futex_lock();
+      tot_time+=t;
       int g = get();
       set(g+1);
-
-      
+      my_unlock();
 
     }
 
+    real_time = uptime() - real_time;
+    real_time = real_time *10;
    
-    
     exit();
     }
 
@@ -44,7 +44,7 @@ main(int argc, char *argv[])
   for(int i=0;i<n_children;i++)
   wait();
   int g = get();
-  printf(1,"Statistics for program with %d children using spin locks to access a shared counter is as follows :\n",n_children);
+  printf(1,"Statistics for program with %d children using futex locks to access a shared counter is as follows :\n",n_children);
   printf(1,"Final value of the shared counter is %d\n",g);
   int end = uptime() - st;
   end = end *10;
